@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUS Linguistics — Sociolingvistika Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+:root {
+  --bg: #f5f2ec;
+  --paper: #faf8f4;
+  --ink: #1a1a1a;
+  --ink2: #4a4a4a;
+  --ink3: #888;
+  --red: #c0392b;
+  --red-pale: #fdf0ee;
+  --teal: #1a6b6b;
+  --teal-pale: #eef5f5;
+  --amber: #c17d11;
+  --rule: #ddd8ce;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-weight: 400; line-height: 1.6; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+/* HEADER */
+header { border-bottom: 2px solid var(--ink); padding: 2.5rem 0 1.5rem; margin-bottom: 3rem; }
+.header-inner { max-width: 860px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.site-name { font-family: var(--mono); font-size: 1.1rem; font-weight: 500; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.5rem; }
+.site-name span { color: var(--red); }
+.header-meta { font-family: var(--mono); font-size: 0.72rem; color: var(--ink3); text-align: right; line-height: 1.8; }
+.hero-block { margin-bottom: 3rem; }
+.hero-block h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 0.75rem; }
+.hero-block .sub { color: var(--ink2); font-size: 0.97rem; font-weight: 300; max-width: 500px; line-height: 1.7; }
+.hero-block .sub em { font-style: italic; color: var(--red); }
+
+/* CREWMATE SVG */
+.crewmate { display: inline-block; width: 20px; height: 24px; vertical-align: middle; }
+
+/* TABS */
+.nav-tabs { display: flex; border-bottom: 1px solid var(--rule); margin-bottom: 3rem; overflow-x: auto; gap: 0; }
+.tab { font-family: var(--mono); font-size: 0.78rem; font-weight: 500; padding: 0.6rem 1.2rem; cursor: pointer; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; color: var(--ink3); white-space: nowrap; background: none; transition: color 0.15s, border-color 0.15s; }
+.tab:hover { color: var(--ink); }
+.tab.active { color: var(--red); border-bottom-color: var(--red); }
+
+/* SECTIONS */
+.section { display: none; }
+.section.active { display: block; }
+
+/* QUESTION ACCORDION */
+.q-list { display: flex; flex-direction: column; }
+.q-item { border-bottom: 1px solid var(--rule); padding: 1.8rem 0; }
+.q-item:first-child { padding-top: 0; }
+.q-header { display: flex; gap: 1.5rem; align-items: flex-start; cursor: pointer; }
+.q-num { font-family: var(--mono); font-size: 0.7rem; color: var(--ink3); padding-top: 3px; flex-shrink: 0; width: 28px; }
+.q-title { font-size: 1rem; font-weight: 600; flex: 1; letter-spacing: -0.01em; }
+.q-toggle { font-family: var(--mono); font-size: 0.9rem; color: var(--ink3); flex-shrink: 0; transition: transform 0.2s; padding-top: 1px; }
+.q-item.open .q-toggle { transform: rotate(45deg); color: var(--red); }
+.q-body { display: none; padding: 1.2rem 0 0 43px; }
+.q-item.open .q-body { display: block; }
+.q-body p { color: var(--ink2); font-size: 0.92rem; line-height: 1.75; margin-bottom: 0.75rem; }
+.q-body p:last-child { margin-bottom: 0; }
+.q-body strong { color: var(--ink); font-weight: 600; }
+.q-body em { font-style: italic; }
+
+/* DEF TABLE */
+.def-list { margin: 0.8rem 0; }
+.def-row { display: grid; grid-template-columns: 170px 1fr; gap: 0.5rem 1.5rem; padding: 0.55rem 0; border-top: 1px solid var(--rule); font-size: 0.9rem; }
+.def-key { font-family: var(--mono); font-size: 0.75rem; font-weight: 500; color: var(--ink); padding-top: 2px; }
+.def-val { color: var(--ink2); line-height: 1.65; }
+@media(max-width:560px){ .def-row { grid-template-columns: 1fr; gap: 0.2rem; } }
+
+/* CALLOUTS */
+.callout { margin: 1rem 0; padding: 0.85rem 1.1rem; border-left: 3px solid var(--rule); font-size: 0.87rem; color: var(--ink2); font-style: italic; background: var(--paper); line-height: 1.65; }
+.callout.red { border-left-color: var(--red); background: var(--red-pale); color: #6b1c14; font-style: normal; }
+.callout.teal { border-left-color: var(--teal); background: var(--teal-pale); color: var(--teal); font-style: normal; }
+
+/* TAGS */
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+.tag { font-family: var(--mono); font-size: 0.7rem; padding: 2px 8px; border-radius: 2px; background: var(--rule); color: var(--ink2); }
+
+/* COMPARISONS */
+.compare-list { display: flex; flex-direction: column; gap: 2.5rem; }
+.compare-block h3 { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule); }
+.split-table { width: 100%; border-collapse: collapse; }
+.split-table th { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; padding: 0.5rem 1rem; text-align: left; background: var(--paper); border: 1px solid var(--rule); color: var(--ink); }
+.split-table th.a { border-top: 2px solid var(--red); }
+.split-table th.b { border-top: 2px solid var(--teal); }
+.split-table th.c { border-top: 2px solid var(--amber); }
+.split-table td { padding: 0.7rem 1rem; border: 1px solid var(--rule); font-size: 0.87rem; color: var(--ink2); vertical-align: top; line-height: 1.65; }
+.split-table td strong { color: var(--ink); }
+.split-table tr.note td { background: var(--paper); font-style: italic; font-size: 0.82rem; color: var(--ink3); }
+
+/* QUIZ */
+.prog-wrap { height: 3px; background: var(--rule); margin-bottom: 2rem; }
+.prog-fill { height: 100%; background: var(--red); transition: width 0.3s; }
+.quiz-meta { font-family: var(--mono); font-size: 0.75rem; color: var(--ink3); margin-bottom: 2rem; display: flex; gap: 2rem; flex-wrap: wrap; }
+.quiz-meta span { color: var(--ink); }
+.q-card { display: none; }
+.q-card.active { display: block; }
+.q-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
+.options { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
+.opt { display: flex; align-items: flex-start; gap: 0.9rem; padding: 0.8rem 1rem; border: 1px solid var(--rule); background: var(--paper); cursor: pointer; font-size: 0.9rem; color: var(--ink2); transition: border-color 0.15s, background 0.15s; text-align: left; width: 100%; border-radius: 2px; font-family: var(--sans); }
+.opt:hover:not(.locked) { border-color: var(--ink); color: var(--ink); background: var(--bg); }
+.opt.correct { border-color: var(--teal); background: var(--teal-pale); color: var(--teal); }
+.opt.wrong { border-color: var(--red); background: var(--red-pale); color: var(--red); }
+.opt.locked { cursor: default; }
+.opt-key { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--ink3); flex-shrink: 0; padding-top: 2px; width: 14px; }
+.opt.correct .opt-key { color: var(--teal); }
+.opt.wrong .opt-key { color: var(--red); }
+.feedback { padding: 0.85rem 1.1rem; border-left: 3px solid var(--rule); font-size: 0.87rem; color: var(--ink2); display: none; background: var(--paper); line-height: 1.65; margin-bottom: 1.2rem; }
+.feedback.show { display: block; }
+.feedback.ok { border-left-color: var(--teal); }
+.feedback.bad { border-left-color: var(--red); }
+.feedback .explain { display: block; margin-top: 0.25rem; font-style: italic; }
+.quiz-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--rule); }
+.quiz-sc { font-family: var(--mono); font-size: 0.78rem; color: var(--ink3); }
+.quiz-sc span { color: var(--ink); }
+.btn { font-family: var(--mono); font-size: 0.78rem; font-weight: 500; padding: 0.5rem 1.2rem; cursor: pointer; border: 1px solid var(--ink); background: var(--ink); color: var(--bg); transition: all 0.15s; display: none; }
+.btn:hover { background: transparent; color: var(--ink); }
+.btn.show { display: inline-block; }
+.quiz-end { display: none; text-align: center; padding: 3.5rem 0; }
+.quiz-end.show { display: block; }
+.quiz-end .big { font-size: 3.5rem; font-family: var(--mono); font-weight: 500; margin-bottom: 0.5rem; }
+.quiz-end .msg { color: var(--ink2); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6; max-width: 440px; margin-left: auto; margin-right: auto; }
+
+/* REFERENCE */
+.ref-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.ref-table thead th { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.5rem 0.8rem; text-align: left; border-bottom: 2px solid var(--ink); color: var(--ink); }
+.ref-table tbody td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--rule); color: var(--ink2); vertical-align: top; line-height: 1.6; }
+.ref-table tbody td:first-child { font-family: var(--mono); font-size: 0.68rem; color: var(--ink3); width: 36px; }
+.ref-table tbody td:nth-child(2) { font-weight: 500; color: var(--ink); width: 200px; }
+.ref-table tbody tr:hover td { background: var(--paper); }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--rule); margin-top: 5rem; padding: 1.5rem 0; }
+.footer-inner { max-width: 860px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+.footer-inner p { font-family: var(--mono); font-size: 0.7rem; color: var(--ink3); }
+.bojo { color: var(--red) !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="site-name">
+      <svg class="crewmate" viewBox="0 0 50 62" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="25" cy="23" rx="20" ry="21" fill="#c0392b"/>
+        <rect x="10" y="16" width="21" height="12" rx="3" fill="#a8d8f0" opacity="0.9"/>
+        <ellipse cx="25" cy="48" rx="17" ry="10" fill="#c0392b"/>
+        <ellipse cx="14" cy="52" rx="7" ry="5" fill="#a02020"/>
+        <ellipse cx="36" cy="52" rx="7" ry="5" fill="#a02020"/>
+      </svg>
+      SUS <span>Linguistics</span>
+    </div>
+    <div class="header-meta">
+      Sociolingvistika · 30 Questions<br>
+      Among Us was an impostor all along
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero-block">
+    <h1>Everything you need.<br>Nothing you don't.</h1>
+    <p class="sub">All 30 exam questions explained clearly. The crewmate studied. <em>Don't be the impostor.</em></p>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab active" onclick="switchTab('questions',this)">Questions</button>
+    <button class="tab" onclick="switchTab('compare',this)">Comparisons</button>
+    <button class="tab" onclick="switchTab('quiz',this)">Quiz</button>
+    <button class="tab" onclick="switchTab('ref',this)">Reference</button>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div class="section active" id="tab-questions">
+    <div class="q-list">
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">01</span><span class="q-title">Components of Communication</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>Communication is a process with six interconnected elements:</p>
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Participants</span><span class="def-val"><strong>Sender</strong> (source) and <strong>Receiver</strong> (destination)</span></div>
+            <div class="def-row"><span class="def-key">Process</span><span class="def-val"><strong>Encoding</strong> — forming the message · <strong>Decoding</strong> — interpreting it</span></div>
+            <div class="def-row"><span class="def-key">Message</span><span class="def-val"><strong>Information</strong> (the idea) + <strong>Language Code</strong> (the system used) + <strong>Signal</strong> (the physical output)</span></div>
+            <div class="def-row"><span class="def-key">Medium</span><span class="def-val"><strong>Channel</strong> (the path) + <strong>Signal Transfer</strong> (the delivery)</span></div>
+          </div>
+          <div class="callout">Sender → Encode → [Info + Code + Signal] → Channel → Decode → Receiver</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">02</span><span class="q-title">Three Types of Information</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Conceptual</span><span class="def-val">The abstract thought <em>before</em> it becomes language. Universal — not tied to any specific language.</span></div>
+            <div class="def-row"><span class="def-key">Linguistic</span><span class="def-val">The form a concept takes in a specific language. E.g. the concept of "tree" → <em>tree</em> in English, <em>strom</em> in Slovak.</span></div>
+            <div class="def-row"><span class="def-key">Material</span><span class="def-val">The physical properties of the signal — voice pitch, tone quality, channel characteristics.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">03–05</span><span class="q-title">Saussure's Trichotomy: Langue, Parole, Langage</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Langage</span><span class="def-val">The broadest term — the general human capacity for language. The umbrella over everything.</span></div>
+            <div class="def-row"><span class="def-key">Langue</span><span class="def-val">The <strong>shared abstract system</strong> — grammar, vocabulary, rules held collectively by a community. The "rulebook."</span></div>
+            <div class="def-row"><span class="def-key">Parole</span><span class="def-val">The <strong>actual individual speech act</strong> — real, concrete language use in a specific moment.</span></div>
+          </div>
+          <div class="callout">Chess: Langage = the concept of chess. Langue = the rules. Parole = the game you played Tuesday.</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">06</span><span class="q-title">Chomsky: Competence vs. Performance</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Competence</span><span class="def-val">The internalized, abstract knowledge of a language. The "perfect" grammar system in the speaker's head.</span></div>
+            <div class="def-row"><span class="def-key">Performance</span><span class="def-val">Actual language use in real life — imperfect, affected by fatigue, distraction, and memory lapses.</span></div>
+          </div>
+          <div class="callout red">Exam trap: Very similar to Saussure's Langue/Parole. Key difference — Saussure focuses on the <strong>social system</strong>; Chomsky focuses on the <strong>individual mind</strong>. (Chomsky was in the Epstein files — sus.)</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">07</span><span class="q-title">Sociolinguistics</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>The study of language <em>in relation to society</em>. Examines how social factors — class, age, location, occupation — influence how people speak.</p>
+          <div class="callout teal">Core question: <strong>"How does society change language?"</strong> Language is the starting point. Also called Micro-sociolinguistics.</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">08</span><span class="q-title">Linguosociology (Sociology of Language)</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>Also called <strong>Macro-sociolinguistics</strong>. Studies society <em>through</em> language — how language shapes social structures, national identity, and policy.</p>
+          <div class="callout teal">Core question: <strong>"How does language change society?"</strong> Society is the starting point.</div>
+          <p>Example: how declaring one language the national standard affects the identity of ethnic minorities.</p>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">09</span><span class="q-title">Micro vs. Macro Sociolinguistics</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>The distinction is your <strong>starting point</strong>:</p>
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Micro (Socioling.)</span><span class="def-val">Starts with Language. Look at a linguistic variation → trace it to a social group.</span></div>
+            <div class="def-row"><span class="def-key">Macro (Linguosociol.)</span><span class="def-val">Starts with Society. Look at a social group → determine the linguistic features that define them.</span></div>
+          </div>
+          <div class="callout">Micro = Language → Society. Macro = Society → Language.</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">10</span><span class="q-title">Theoretical vs. Applied Sociolinguistics</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Theoretical</span><span class="def-val">Builds models and frameworks. Academic — creates general rules for how language works in social contexts.</span></div>
+            <div class="def-row"><span class="def-key">Applied</span><span class="def-val">Uses those theories for real-world problems: language planning, curriculum design, national language policy.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">11</span><span class="q-title">Variety (Lect)</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>A <strong>neutral umbrella term</strong> for any specific form of language used by a particular group. Defined by a consistent set of linguistic items (sounds, words, grammar) sharing the same social, geographical, or situational distribution.</p>
+          <p>Preferred over "dialect" because it carries no political or prestige baggage.</p>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">12</span><span class="q-title">Language vs. Dialect</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Language</span><span class="def-val">High social prestige, backed by a state or institution. Different languages are typically not mutually intelligible.</span></div>
+            <div class="def-row"><span class="def-key">Dialect</span><span class="def-val">A variation within a language. Usually mutually intelligible (e.g. British vs. American English).</span></div>
+          </div>
+          <div class="callout red">"A language is a dialect with an army and a navy." — Max Weinreich. Norwegian and Swedish are mutually intelligible but called separate languages due to national borders. Very sus.</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">13</span><span class="q-title">Dialect Levelling (Normalization)</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>The <strong>natural, uncontrolled</strong> process by which unique regional features disappear as speakers converge toward a shared majority norm. Happens organically through contact and mobility — not by institutional decree.</p>
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">vs. Standardization</span><span class="def-val">Standardization is <em>deliberate</em> — imposed through schools and government. Dialect levelling is spontaneous.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">14</span><span class="q-title">Types of Dialects</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Sociolect</span><span class="def-val">Social dialect — defined by social class, age, or occupation. (Teen slang, professional jargon, working-class accent.)</span></div>
+            <div class="def-row"><span class="def-key">Geolect</span><span class="def-val">Regional dialect — defined by geographical location. (Yorkshire English, Slovak from Bratislava vs. Košice.)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">15</span><span class="q-title">Overt vs. Covert Prestige</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Overt Prestige</span><span class="def-val">Seeking status by using the <strong>standard variety</strong> — the language of education, law, media. Publicly acknowledged.</span></div>
+            <div class="def-row"><span class="def-key">Covert Prestige</span><span class="def-val">Seeking status by using a <strong>non-standard variety</strong>. Shows loyalty to a community or subculture. Hidden from mainstream view but real within the group.</span></div>
+          </div>
+          <div class="callout">Example: using local slang to signal authenticity to your friend group, even though you "know better."</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">16</span><span class="q-title">Vernacular</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>The <strong>informal, everyday speech</strong> acquired at home as a first language. It is <em>uncodified</em> — not governed by official grammar rules. Represents the most natural and spontaneous form of communication in private settings.</p>
+          <div class="tags"><span class="tag">Informal</span><span class="tag">Uncodified</span><span class="tag">First language</span><span class="tag">Home speech</span></div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">17</span><span class="q-title">Pidgins</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>A simplified contact language that emerges when groups with no common language need to communicate — typically for trade. Limited grammar, limited vocabulary, draws from multiple source languages.</p>
+          <div class="callout red"><strong>Critical: No native speakers.</strong> A pidgin is always a second language for everyone who uses it. This is the single most testable point.</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">18</span><span class="q-title">Superstrate vs. Substrate</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>In a pidgin, the two source languages play different roles:</p>
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Superstrate</span><span class="def-val">The <strong>dominant language</strong> (colonizer, trading power). Contributes most of the <strong>vocabulary</strong>.</span></div>
+            <div class="def-row"><span class="def-key">Substrate</span><span class="def-val">The <strong>subordinate language</strong> (local/enslaved population). Influences <strong>grammar and phonology</strong>.</span></div>
+          </div>
+          <div class="callout">Super = above = power = vocabulary. Sub = below = foundation = grammar structure.</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">19</span><span class="q-title">Creole</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>A creole is a pidgin that has <strong>acquired native speakers</strong>. When children grow up in a pidgin-speaking community and adopt it as their first language, the language undergoes <em>de-simplification</em> — grammar complexifies, vocabulary expands.</p>
+          <div class="callout teal">Pidgin (no native speakers) → children acquire it as L1 → Creole (full native language)</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">20</span><span class="q-title">Speech Community</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>A group of people who interact regularly and share two things: a common language or dialect, and a shared set of <strong>social norms</strong> for how and when to use it.</p>
+          <div class="callout">It is not enough to share a language — the group must share the <em>rules of use</em>: when formal register is appropriate, when slang is acceptable, etc.</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">21</span><span class="q-title">Community of Practice</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>A group united by a <strong>shared enterprise</strong> — a job, a hobby, a sport — who develop shared ways of talking through mutual engagement. Language is a byproduct of doing things together.</p>
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">vs. Speech Community</span><span class="def-val">Speech community = defined by shared language norms. Community of Practice = defined by shared <em>activity</em>.</span></div>
+          </div>
+          <div class="callout">Among Us crew doing tasks together = community of practice. They develop "sus," "vent," "vote" — shared language from shared activity.</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">22</span><span class="q-title">Communicative Competence</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>Coined by <strong>Dell Hymes</strong>. Expanded Chomsky's "competence" to include social knowledge — not just knowing the grammar but knowing how to use language <em>appropriately</em>.</p>
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Linguistic competence</span><span class="def-val">Grammatical knowledge — what is structurally correct.</span></div>
+            <div class="def-row"><span class="def-key">Sociolinguistic competence</span><span class="def-val">Social knowledge — what is appropriate: when, with whom, in what context.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">23</span><span class="q-title">Units of Communication</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>Three nested levels, largest to smallest:</p>
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Communicative Situation</span><span class="def-val">The overall context — a lecture, a party, an emergency meeting.</span></div>
+            <div class="def-row"><span class="def-key">Communicative Event</span><span class="def-val">A specific activity within that situation — a toast, a vote, an accusation.</span></div>
+            <div class="def-row"><span class="def-key">Communicative Act</span><span class="def-val">A single speech act — "That's sus," "I saw you vent," "I vote red."</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">24</span><span class="q-title">Approaches to Linguistic Research</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Qualitative vs. Quantitative</span><span class="def-val">Meaning and interpretation vs. numerical data and statistical analysis.</span></div>
+            <div class="def-row"><span class="def-key">Synchronic vs. Diachronic</span><span class="def-val">Language at one point in time vs. language change over time.</span></div>
+            <div class="def-row"><span class="def-key">Inductive vs. Deductive</span><span class="def-val">Data → theory (inductive) vs. theory → testing (deductive).</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">25</span><span class="q-title">What is a Variable?</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>A <strong>variable</strong> is a linguistic or social category that contains a set of alternatives, each called a <strong>variant</strong> (or value).</p>
+          <div class="callout">Example: future tense is a variable. Its variants are "gonna" vs. "will" — same meaning, different social context.</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">26</span><span class="q-title">Types of Linguistic Variables (at least 3)</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Phonetic</span><span class="def-val">Sound variation — e.g. dropping the /h/ in "house" → "'ouse"</span></div>
+            <div class="def-row"><span class="def-key">Morphological</span><span class="def-val">Word-form variation — e.g. "dived" vs. "dove"</span></div>
+            <div class="def-row"><span class="def-key">Lexical</span><span class="def-val">Word-choice variation — e.g. "lift" (UK) vs. "elevator" (US)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">27</span><span class="q-title">Types of Social Variables (at least 5)</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>Features of speakers that correlate with linguistic variation:</p>
+          <div class="tags"><span class="tag">Social class</span><span class="tag">Age</span><span class="tag">Gender</span><span class="tag">Race</span><span class="tag">Ethnicity</span></div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">28</span><span class="q-title">Types of Situational Variables (at least 5)</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>Features of the communicative situation that influence language use:</p>
+          <div class="tags"><span class="tag">Medium</span><span class="tag">Field</span><span class="tag">Genre</span><span class="tag">Style</span><span class="tag">Setting</span></div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">29</span><span class="q-title">Indicator, Marker, Stereotype</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>Three levels of a linguistic variable, ordered by degree of <strong>speaker awareness</strong>:</p>
+          <div class="def-list">
+            <div class="def-row"><span class="def-key">Indicator</span><span class="def-val">Group variation exists. Speakers are <strong>unaware</strong>. Does not shift with speech style.</span></div>
+            <div class="def-row"><span class="def-key">Marker</span><span class="def-val">Group variation exists. Speakers have <strong>some awareness</strong>. Changes between formal and informal speech.</span></div>
+            <div class="def-row"><span class="def-key">Stereotype</span><span class="def-val">Group variation exists. Speakers are <strong>fully conscious</strong> of it. Publicly discussed, mocked, or imitated.</span></div>
+          </div>
+          <div class="callout">Awareness scale: Indicator (none) → Marker (some) → Stereotype (full). Think: volume dial.</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-header" onclick="toggleQ(this)"><span class="q-num">30</span><span class="q-title">What is a Hypothesis?</span><span class="q-toggle">+</span></div>
+        <div class="q-body">
+          <p>A <strong>scientific assumption</strong> — a tentative answer to a research problem. It specifies a measurable relationship between variables that can be tested through systematic observation. It is not a fact; it is a <em>testable prediction</em>.</p>
+          <div class="tags"><span class="tag">Testable</span><span class="tag">Measurable</span><span class="tag">Tentative</span><span class="tag">Falsifiable</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPARISONS -->
+  <div class="section" id="tab-compare">
+    <div class="compare-list">
+
+      <div class="compare-block">
+        <h3>Saussure vs. Chomsky — How they divide language</h3>
+        <table class="split-table">
+          <tr><th class="a">Saussure</th><th class="b">Chomsky</th></tr>
+          <tr><td><strong>Langue</strong> — shared abstract system of a community (social)</td><td><strong>Competence</strong> — perfect grammar in one individual's head (psychological)</td></tr>
+          <tr><td><strong>Parole</strong> — individual speech acts in real life</td><td><strong>Performance</strong> — actual, imperfect speech (fatigue, distraction, etc.)</td></tr>
+          <tr class="note"><td colspan="2">Key difference: Saussure = social system. Chomsky = individual mind. Both separate the "rulebook" from the "use."</td></tr>
+        </table>
+      </div>
+
+      <div class="compare-block">
+        <h3>Sociolinguistics (Micro) vs. Linguosociology (Macro)</h3>
+        <table class="split-table">
+          <tr><th class="a">Sociolinguistics — Micro</th><th class="b">Linguosociology — Macro</th></tr>
+          <tr><td>Starts with <strong>language features</strong></td><td>Starts with <strong>social groups</strong></td></tr>
+          <tr><td>Asks: how does society shape language?</td><td>Asks: how does language shape society?</td></tr>
+          <tr><td>Studies slang/accents → links to class/age/place</td><td>Studies ethnic groups → links to policy and identity</td></tr>
+          <tr class="note"><td colspan="2">Same subject matter, opposite direction. It's about your starting point.</td></tr>
+        </table>
+      </div>
+
+      <div class="compare-block">
+        <h3>Pidgin vs. Creole</h3>
+        <table class="split-table">
+          <tr><th class="a">Pidgin</th><th class="b">Creole</th></tr>
+          <tr><td><strong>No native speakers</strong> — always a second language</td><td><strong>Has native speakers</strong> — acquired by children as L1</td></tr>
+          <tr><td>Simplified grammar and vocabulary</td><td>De-simplification — fuller grammar and vocab emerge</td></tr>
+          <tr><td>Created for specific need (trade, contact)</td><td>Develops when a community adopts pidgin as its primary language</td></tr>
+          <tr class="note"><td colspan="2">Creole is a nativized pidgin. Process: Pidgin → children adopt it as L1 → Creole.</td></tr>
+        </table>
+      </div>
+
+      <div class="compare-block">
+        <h3>Speech Community vs. Community of Practice</h3>
+        <table class="split-table">
+          <tr><th class="a">Speech Community</th><th class="b">Community of Practice</th></tr>
+          <tr><td>Defined by <strong>shared language + shared norms of use</strong></td><td>Defined by <strong>shared activity or enterprise</strong></td></tr>
+          <tr><td>Can be large (a city, a country)</td><td>Usually smaller and specific (a team, a crew, a department)</td></tr>
+          <tr><td>Members defined by how they speak</td><td>Language is a byproduct of doing things together</td></tr>
+          <tr class="note"><td colspan="2">Among Us players who know the lingo = speech community. The specific crew who plays together daily and develops private terms = community of practice.</td></tr>
+        </table>
+      </div>
+
+      <div class="compare-block">
+        <h3>Overt vs. Covert Prestige</h3>
+        <table class="split-table">
+          <tr><th class="a">Overt Prestige</th><th class="b">Covert Prestige</th></tr>
+          <tr><td>Using the <strong>standard/formal</strong> variety for status</td><td>Using a <strong>non-standard/local</strong> variety for status</td></tr>
+          <tr><td>Publicly acknowledged, mainstream recognition</td><td>Hidden from mainstream; real only within the in-group</td></tr>
+          <tr><td>Language of education, law, broadcast media</td><td>Local accent, community slang, subculture dialect</td></tr>
+          <tr class="note"><td colspan="2">Both are about social status. The difference is whose status, and which community recognizes it.</td></tr>
+        </table>
+      </div>
+
+      <div class="compare-block">
+        <h3>Indicator → Marker → Stereotype (awareness scale)</h3>
+        <table class="split-table">
+          <tr><th>Indicator</th><th class="c">Marker</th><th class="a">Stereotype</th></tr>
+          <tr><td>Group variation. Speakers <strong>unaware</strong>.</td><td>Group variation. Speakers <strong>partially aware</strong>.</td><td>Group variation. Speakers <strong>fully aware</strong>.</td></tr>
+          <tr><td>No style-shifting.</td><td>Shifts between formal and informal.</td><td>Publicly discussed, mocked, or imitated.</td></tr>
+          <tr class="note"><td colspan="3">Think of it as a dial: Indicator = silent. Marker = audible. Stereotype = everyone's talking about it.</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="tab-quiz">
+    <div class="prog-wrap"><div class="prog-fill" id="progFill" style="width:0"></div></div>
+    <div class="quiz-meta">
+      Question <span id="qCurrent">1</span> of <span id="qTotal">10</span> &nbsp;·&nbsp; Score <span id="scoreNum">0</span> / <span id="scoreOf">0</span>
+    </div>
+    <div id="quizCards"></div>
+    <div class="quiz-end" id="quizEnd">
+      <div class="big" id="finalScore">—</div>
+      <p class="msg" id="finalMsg"></p>
+      <button class="btn show" onclick="restartQuiz()">Restart quiz</button>
+    </div>
+  </div>
+
+  <!-- REFERENCE -->
+  <div class="section" id="tab-ref">
+    <table class="ref-table">
+      <thead><tr><th>#</th><th>Term</th><th>One-line definition</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Encoding / Decoding</td><td>Forming a message vs. interpreting it</td></tr>
+        <tr><td>2</td><td>Conceptual Information</td><td>Abstract pre-language thought, not tied to any language</td></tr>
+        <tr><td>2</td><td>Linguistic Information</td><td>How a concept is expressed in a specific language</td></tr>
+        <tr><td>2</td><td>Material Information</td><td>Physical properties of the signal (pitch, tone, channel)</td></tr>
+        <tr><td>3–5</td><td>Langage</td><td>General human capacity for language (umbrella term)</td></tr>
+        <tr><td>3–5</td><td>Langue</td><td>Shared abstract language system of a community</td></tr>
+        <tr><td>3–5</td><td>Parole</td><td>Actual individual speech acts in real life</td></tr>
+        <tr><td>6</td><td>Competence (Chomsky)</td><td>Internalized perfect grammar knowledge; the individual's mental rulebook</td></tr>
+        <tr><td>6</td><td>Performance (Chomsky)</td><td>Actual imperfect language use in real-life situations</td></tr>
+        <tr><td>7</td><td>Sociolinguistics</td><td>How society shapes language (language is the starting point); Micro</td></tr>
+        <tr><td>8</td><td>Linguosociology</td><td>How language shapes society (society is the starting point); Macro</td></tr>
+        <tr><td>9</td><td>Micro-sociolinguistics</td><td>Language → Social group (starts with linguistic features)</td></tr>
+        <tr><td>9</td><td>Macro-sociolinguistics</td><td>Social group → Language (starts with social structure)</td></tr>
+        <tr><td>10</td><td>Theoretical Socioling.</td><td>Builds academic models and frameworks</td></tr>
+        <tr><td>10</td><td>Applied Socioling.</td><td>Uses theory for real-world language problems</td></tr>
+        <tr><td>11</td><td>Variety / Lect</td><td>Neutral term for any form of language used by a group</td></tr>
+        <tr><td>12</td><td>Language vs. Dialect</td><td>"A dialect with an army and a navy" — distinction based on power, not linguistics</td></tr>
+        <tr><td>13</td><td>Dialect Levelling</td><td>Natural convergence toward a norm; distinct from deliberate standardization</td></tr>
+        <tr><td>14</td><td>Sociolect</td><td>Dialect defined by social class, age, or occupation</td></tr>
+        <tr><td>14</td><td>Geolect</td><td>Dialect defined by geographical location</td></tr>
+        <tr><td>15</td><td>Overt Prestige</td><td>Status from using the standard/formal variety</td></tr>
+        <tr><td>15</td><td>Covert Prestige</td><td>Status from using a non-standard variety within a subgroup</td></tr>
+        <tr><td>16</td><td>Vernacular</td><td>Informal, uncodified home speech; the most natural register</td></tr>
+        <tr><td>17</td><td>Pidgin</td><td>Simplified contact language; NO native speakers</td></tr>
+        <tr><td>18</td><td>Superstrate</td><td>Dominant language in pidgin formation; provides vocabulary</td></tr>
+        <tr><td>18</td><td>Substrate</td><td>Subordinate language in pidgin; influences grammar and phonology</td></tr>
+        <tr><td>19</td><td>Creole</td><td>A pidgin that has gained native speakers; undergoes de-simplification</td></tr>
+        <tr><td>20</td><td>Speech Community</td><td>Group sharing a language and the norms for its use</td></tr>
+        <tr><td>21</td><td>Community of Practice</td><td>Group united by shared activity; language develops as byproduct</td></tr>
+        <tr><td>22</td><td>Communicative Competence</td><td>Dell Hymes: grammatical knowledge + social appropriateness in use</td></tr>
+        <tr><td>23</td><td>Units of Communication</td><td>Situation → Event → Act (three nested levels)</td></tr>
+        <tr><td>24</td><td>Research Approaches</td><td>Qualitative/Quantitative · Synchronic/Diachronic · Inductive/Deductive</td></tr>
+        <tr><td>25</td><td>Variable</td><td>Linguistic/social category with a set of alternative forms (variants)</td></tr>
+        <tr><td>26</td><td>Linguistic Variable types</td><td>Phonetic, Morphological, Lexical</td></tr>
+        <tr><td>27</td><td>Social Variable types</td><td>Social class · Age · Gender · Race · Ethnicity</td></tr>
+        <tr><td>28</td><td>Situational Variable types</td><td>Medium · Field · Genre · Style · Setting</td></tr>
+        <tr><td>29</td><td>Indicator</td><td>Group variation; speakers unaware; no style-shifting</td></tr>
+        <tr><td>29</td><td>Marker</td><td>Group variation; some awareness; shifts between formal and informal</td></tr>
+        <tr><td>29</td><td>Stereotype</td><td>Group variation; high awareness; publicly mocked or imitated</td></tr>
+        <tr><td>30</td><td>Hypothesis</td><td>Testable scientific assumption specifying a measurable relationship between variables</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <p>Sociolingvistika Study Guide · 30 Questions</p>
+    <p class="bojo">🥀 Make Bojo Great Again — two tests, one week. Highly sus.</p>
+  </div>
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleQ(header) {
+  const item = header.parentElement;
+  const wasOpen = item.classList.contains('open');
+  item.classList.toggle('open', !wasOpen);
+}
+
+const questions = [
+  { q: "What is the defining feature of a pidgin that distinguishes it from a creole?", opts: ["It has a fixed writing system", "It has no native speakers", "It is more grammatically complex", "It originates from a single source language"], ans: 1, explain: "No native speakers is the critical feature. Everyone uses a pidgin as a second language. When children in the community adopt it as their L1, it becomes a creole." },
+  { q: "Chomsky's 'Competence' is most analogous to which of Saussure's concepts?", opts: ["Parole", "Langage", "Langue", "Vernacular"], ans: 2, explain: "Both Langue and Competence refer to the underlying abstract system rather than actual use. The difference: Langue is social/collective; Competence is individual and psychological." },
+  { q: "Sociolinguistics and Linguosociology both study language and society. What separates them?", opts: ["Sociolinguistics is theoretical; Linguosociology is applied", "Sociolinguistics starts with language; Linguosociology starts with society", "Sociolinguistics only studies dialects", "There is no meaningful distinction"], ans: 1, explain: "The starting point is everything. Sociolinguistics (Micro) = Language → Society. Linguosociology (Macro) = Society → Language." },
+  { q: "A speaker uses local slang with friends even though they could use standard English, gaining respect within the group. This illustrates:", opts: ["Overt prestige", "Dialect levelling", "Covert prestige", "A linguistic marker"], ans: 2, explain: "Covert prestige: status gained by using a non-standard variety to signal group loyalty. The prestige is invisible to mainstream society but very real within the in-group." },
+  { q: "Dell Hymes coined 'Communicative Competence.' What did he add to Chomsky's narrower definition?", opts: ["The study of phonetics", "Social appropriateness — knowing when and how to use language correctly", "The distinction between Langue and Parole", "The concept of the substrate"], ans: 1, explain: "Chomsky's competence = grammatical knowledge only. Hymes added social competence: knowing what is appropriate — which variety to use, when, and with whom." },
+  { q: "In pidgin formation, which language provides most of the vocabulary?", opts: ["The substrate", "The creole", "The vernacular", "The superstrate"], ans: 3, explain: "Superstrate = the dominant/prestige language (usually the colonizer). It supplies most vocabulary. The substrate (subordinate language) influences grammar and phonology." },
+  { q: "A linguistic feature varies between social groups, but speakers are unaware of it and it does not change with context. This is called:", opts: ["A stereotype", "A marker", "An indicator", "A variant"], ans: 2, explain: "Indicator: group variation exists, speakers are unaware, no style-shifting occurs. Marker: some awareness, style-shifting. Stereotype: full conscious awareness, publicly discussed." },
+  { q: "How does Dialect Levelling differ from Standardization?", opts: ["Dialect levelling affects writing only", "Dialect levelling is natural and spontaneous; standardization is deliberate and institutional", "They describe the same process", "Standardization is always faster"], ans: 1, explain: "Dialect levelling = organic convergence through contact and mobility, not planned by anyone. Standardization = top-down intervention by schools, governments, and language academies." },
+  { q: "Which term describes a group united by shared activity (e.g. a sports team) who develop shared language as a byproduct?", opts: ["Speech Community", "Sociolect group", "Community of Practice", "Geolect"], ans: 2, explain: "Community of Practice = defined by shared activity. Speech Community = defined by shared language norms. In a CoP, language emerges from doing things together, not the other way around." },
+  { q: "In Saussure's trichotomy, 'Langage' refers to:", opts: ["The grammar rules of French specifically", "Individual speech acts", "The shared abstract system of one language community", "The general human capacity for language"], ans: 3, explain: "Langage is the broadest of the three terms: the human capacity for language in general. Langue = specific shared system. Parole = individual use. A common exam error is confusing Langage with Langue." }
+];
+
+let cur = 0, score = 0, answered = 0;
+
+function buildQuiz() {
+  const c = document.getElementById('quizCards');
+  c.innerHTML = questions.map((q, i) => `
+    <div class="q-card ${i===0?'active':''}" id="qc${i}">
+      <h3>${q.q}</h3>
+      <div class="options">
+        ${q.opts.map((o,j)=>`<button class="opt" onclick="pick(${i},${j})" id="o${i}_${j}"><span class="opt-key">${'abcd'[j]}</span>${o}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb${i}"></div>
+      <div class="quiz-foot">
+        <div class="quiz-sc">Score <span id="sc${i}">0</span> / <span id="sc2${i}">0</span></div>
+        <button class="btn" id="nb${i}" onclick="nextQ(${i})">${i<questions.length-1?'Next →':'See results'}</button>
+      </div>
+    </div>`).join('');
+  document.getElementById('qTotal').textContent = questions.length;
+  updateMeta();
+}
+
+function pick(qi, oi) {
+  const q = questions[qi];
+  document.querySelectorAll(`#qc${qi} .opt`).forEach(b => { b.classList.add('locked'); b.onclick = null; });
+  answered++;
+  const fb = document.getElementById(`fb${qi}`);
+  if (oi === q.ans) {
+    score++;
+    document.getElementById(`o${qi}_${oi}`).classList.add('correct');
+    fb.className = 'feedback show ok';
+    fb.innerHTML = `Correct. <span class="explain">${q.explain}</span>`;
+  } else {
+    document.getElementById(`o${qi}_${oi}`).classList.add('wrong');
+    document.getElementById(`o${qi}_${q.ans}`).classList.add('correct');
+    fb.className = 'feedback show bad';
+    fb.innerHTML = `Incorrect. <span class="explain">${q.explain}</span>`;
+  }
+  document.getElementById(`sc${qi}`).textContent = score;
+  document.getElementById(`sc2${qi}`).textContent = answered;
+  document.getElementById(`nb${qi}`).classList.add('show');
+  updateMeta();
+}
+
+function nextQ(qi) {
+  document.getElementById(`qc${qi}`).classList.remove('active');
+  if (qi + 1 < questions.length) {
+    document.getElementById(`qc${qi+1}`).classList.add('active');
+    cur = qi + 1;
+    updateMeta();
+  } else {
+    document.getElementById('quizCards').style.display = 'none';
+    document.getElementById('quizEnd').classList.add('show');
+    document.getElementById('finalScore').textContent = `${score} / ${questions.length}`;
+    const msgs = ["Go back through the Questions tab carefully.", "A few gaps — check the Comparisons tab.", "Solid. One more read-through will cement it.", "Very good. Nearly exam-ready.", "Perfect. The crewmate is not the impostor."];
+    document.getElementById('finalMsg').textContent = msgs[Math.min(4, Math.floor((score/questions.length)*5))];
+  }
+}
+
+function updateMeta() {
+  document.getElementById('qCurrent').textContent = Math.min(cur + 1, questions.length);
+  document.getElementById('scoreNum').textContent = score;
+  document.getElementById('scoreOf').textContent = answered;
+  document.getElementById('progFill').style.width = `${(cur / questions.length) * 100}%`;
+}
+
+function restartQuiz() {
+  cur = 0; score = 0; answered = 0;
+  document.getElementById('quizEnd').classList.remove('show');
+  document.getElementById('quizCards').style.display = '';
+  buildQuiz();
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
